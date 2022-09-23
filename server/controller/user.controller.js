@@ -1,7 +1,7 @@
 const db = require('../database');
 
 class UserController {
-  /*async getUsers(req, res) {
+  async getUsers(req, res) {
     if (req.query.mail) {
       const { mail, password } = req.query;
       const users = await db.query("SELECT * FROM user WHERE mail = $1 and password = $2", [mail, password]);
@@ -21,7 +21,7 @@ class UserController {
       const users = await db.query("SELECT * FROM user");
       res.json({ user: users.rows });
     }
-  }*/
+  }
 
   async createUser(req, res) {
     const { name, mail, password } = req.body;
@@ -32,7 +32,7 @@ class UserController {
 
   }
 
-  /*async blockUser(req, res) {
+  async blockUser(req, res) {
     const id = +req.params.id;
     const user = await db.query("UPDATE user SET status = 'Blocked' where id = $1 RETURNING *", [id]);
     res.json({ user: user.rows[0] });
@@ -58,7 +58,7 @@ class UserController {
   async deleteAllUsers(req, res) {
     const users = await db.query("DELETE FROM user where id = id RETURNING *");
     res.json({ user: users.rows });
-  }*/
+  }
 }
 
 function getFormattedDateTime(dateTime) {
