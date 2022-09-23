@@ -1,13 +1,19 @@
 const express = require('express');
+const app = express()
+const bodyParser = require('body-parser');
 const cors = require('cors');
 const userRouter = require('./routes/user.routes')
 
 const PORT = process.env.PORT || 5000
 
-const app = express()
 app.use(cors())
-app.use(express.json())
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
 app.use('/api', userRouter)
+
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+  }
 
 app.listen(PORT, () => console.log(`server started on port ${PORT}`))
