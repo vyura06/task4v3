@@ -8,7 +8,7 @@ axios.defaults.headers.common = {
   'Access-Control-Allow-Credentials': true
 };
 
-const baseUrl = '/api/users'; 
+const baseUrl = '/users'; 
 
 const getAllUsers = () => {
   const request = axios.get(baseUrl);
