@@ -23,9 +23,11 @@ class UserController {
     }
   }
 
+  
+
   async createUser(req, res) {
     const { name, mail, password } = req.body;
-    const newUser = await db.query(`INSERT INTO user (name, mail, password, status, createddate, lastvisit) values ($1, $2, $3, null, $4, null) RETURNING *`,
+    const newUser = await db.query(`INSERT INTO user(name, mail, password, status, createddate, lastvisit) values ($1, $2, $3, null, $4, null) RETURNING *`,
       [name, mail, password, getFormattedDateTime(new Date())]
     );
     res.json({user: newUser.rows[0] });
