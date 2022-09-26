@@ -1,4 +1,4 @@
-import { Outlet, Link, useNavigate } from 'react-router-dom';
+import { Outlet, NavLink, Link, useNavigate } from 'react-router-dom';
 import { Button } from "@mui/material"
 import "./MainPage.css";
 
@@ -21,7 +21,7 @@ function MainPage(props) {
             <Link className="nav__link" to="/sign-up">Sign up</Link>
           </>):
             (<>
-              <Link className="nav__link" to="/users">Users</Link>
+              <NavLink className="nav__link" to="/users">Users</NavLink>
               <Button onClick={logout} style={{ right: 20, position: "absolute" }} variant="contained">
                 Logout
               </Button>

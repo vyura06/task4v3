@@ -2,13 +2,13 @@ import axios from 'axios';
 
 axios.defaults.headers.common = {
   "Content-Type": "application/json",
-  'Access-Control-Allow-Origin': 'http://localhost:5000',
+  'Access-Control-Allow-Origin': "http://localhost:8080",
   'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE',
   'Access-Control-Allow-Headers': 'X-Requested-With,content-type',
   'Access-Control-Allow-Credentials': true
 };
 
-const baseUrl = '/users'; 
+const baseUrl = 'http://localhost:8080/api/users'; 
 
 const getAllUsers = () => {
   const request = axios.get(baseUrl);

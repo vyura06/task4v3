@@ -6,9 +6,9 @@ class UserController {
 
   async createUser(req, res) {
     try {
-      const { id, name, mail, password } = req.body;
-      const newUser = await db.query(`INSERT INTO "public".user(id, name, mail, password, status, createddate, lastvisit) values ($1, $2, $3, $4, '1', $5, null) RETURNING *`,
-        [id, name, mail, password, getFormattedDateTime(new Date())]
+      const { name, mail, password } = req.body;
+      const newUser = await db.query(`INSERT INTO "public".user(name, mail, password, status, createddate, lastvisit) values ($1, $2, $3, null, $4, null) RETURNING *`,
+        [name, mail, password, getFormattedDateTime(new Date())]
       );
       res.json({ user: newUser.rows[0] });
       console.log(req.body);
@@ -52,7 +52,7 @@ class UserController {
   async blockUser(req, res) {
     try {
       const id = +req.params.id;
-      const user = await db.query(`UPDATE "public".user SET status = '0' where id = $1 RETURNING *`, [id]);
+      const user = await db.query(`UPDATE "public".user SET status = 'Blocked' where id = $1 RETURNING *`, [id]);
       res.json({ user: user.rows[0] });
       res.json("User was blocked")
     } catch (err) {
@@ -64,7 +64,7 @@ class UserController {
 
   async blockAllUsers(req, res) {
     try {
-      const users = await db.query(`UPDATE "public".user SET status = '0' where id = id RETURNING *`);
+      const users = await db.query(`UPDATE "public".user SET status = 'Blocked' where id = id RETURNING *`);
       res.json({ user: users.rows });
       res.json("Users was blocked")
     } catch (err) {
@@ -77,7 +77,7 @@ class UserController {
   async unblockUser(req, res) {
     try {
       const id = +req.params.id;
-      const user = await db.query(`UPDATE "public".user SET status = '1' where id = $1 RETURNING *`, [id]);
+      const user = await db.query(`UPDATE "public".user SET status = null where id = $1 RETURNING *`, [id]);
       res.json({ user: user.rows[0] });
       res.json("User was unblocked")
     } catch (err) {
