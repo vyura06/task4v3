@@ -52,7 +52,7 @@ class UserController {
   async blockUser(req, res) {
     try {
       const id = +req.params.id;
-      const user = await db.query(`UPDATE "public".user SET status = 'Blocked' where id = $1 RETURNING *`, [id]);
+      const user = await db.query(`UPDATE "public".user SET status = true where id = $1 RETURNING *`, [id]);
       res.json({ user: user.rows[0] });
       res.json("User was blocked")
     } catch (err) {
@@ -64,7 +64,7 @@ class UserController {
 
   async blockAllUsers(req, res) {
     try {
-      const users = await db.query(`UPDATE "public".user SET status = 'Blocked' where id = id RETURNING *`);
+      const users = await db.query(`UPDATE "public".user SET status = true where id = id RETURNING *`);
       res.json({ user: users.rows });
       res.json("Users was blocked")
     } catch (err) {
