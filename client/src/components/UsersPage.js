@@ -1,18 +1,16 @@
+import { withErrorBoundary } from 'react-error-boundary'
 import { useState, useEffect } from 'react';
 import usersService from '../services/users';
-import 'react-data-grid/lib/styles.css';
-import DataGrid from 'react-data-grid';
+import { DataGrid } from '@mui/x-data-grid';
 import { ButtonGroup, Button } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import Alert from '@mui/material/Alert';
 import { useNavigate } from 'react-router-dom';
-import { withErrorBoundary } from 'react-error-boundary'
-
 
 function UsersPage(props) {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
   let [selectedUsers, setSelectedUsers] = useState([]);
-
 
   useEffect(() => {
     usersService
@@ -32,17 +30,15 @@ function UsersPage(props) {
       <Alert severity="error">The account was blocked! You have no premissions to visit this page!</Alert>
     )
 
-
   const columns = [
-    { field: 'id', headerName: 'ID', width: 80, color: 'white' },
+    { field: 'id', headerName: 'ID', width: 80 },
     { field: 'name', headerName: 'Name', width: 130 },
     { field: 'mail', headerName: 'Mail', width: 130 },
     { field: 'status', headerName: 'Status', width: 130 },
     { field: 'createddate', headerName: 'Created', width: 250 },
     { field: 'lastvisit', headerName: 'Last visit', width: 250 },
   ];
-
-
+  
   function handleSelection(selectedIndexes, details) {
     const selected = [];
     selectedIndexes.forEach(index => selected.push(
@@ -124,7 +120,7 @@ function UsersPage(props) {
 
   return (
     <>
-      <ButtonGroup style={{ marginBottom: 15 }} disableElevation variant="contained">
+      <ButtonGroup style={{ marginBottom: 15, backgroundColor: 'white'}} disableElevation>
         <Button onClick={handleBlock}>Block</Button>
         <Button onClick={handleUnblock}>Unblock</Button>
         <Button onClick={handleDelete}>
@@ -143,6 +139,7 @@ function UsersPage(props) {
         />
       </div>
     </>
+    
   );
 }
 

@@ -39,7 +39,7 @@ class UserController {
       }
       else {
         const users = await db.query(`SELECT * FROM "public".user`);
-        res.json({ user: users.rows });
+        res.json({ users: users.rows });
       }
       console.log(req.body);
     } catch (err) {
