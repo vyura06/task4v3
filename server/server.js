@@ -3,7 +3,7 @@ const app = express()
 const cors = require('cors');
 const pool = require('./database');
 const userRouter = require('./routes/user.routes')
-requare('dotenv').config()
+require('dotenv').config()
 
 const PORT = process.env.PORT || 8080
 
