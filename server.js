@@ -4,7 +4,7 @@ const cors = require('cors');
 const pool = require('./database');
 const userRouter = require('./routes/user.routes')
 
-const PORT = /*process.env.PORT || 8080*/ 8080
+const PORT = process.env.PORT || 8080
 
 app.use(cors())
 app.use(express.json())
