@@ -5,15 +5,14 @@ const pool = require('./database');
 const userRouter = require('./routes/user.routes')
 const bodyParser = require("body-parser");
 
-const PORT = process.env.PORT || 8080
+const PORT = 8080
 
 app.use(cors())
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000 }));
 
 app.use('/api', userRouter)
-if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
-  }
+app.use(express.static("client/build"));
+
 
 app.listen(PORT, () => console.log(`server started on port ${PORT}`))
